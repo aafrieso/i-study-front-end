@@ -8,7 +8,8 @@ import Login from './pages/Login/Login'
 import Landing from './pages/Landing/Landing'
 import Profiles from './pages/Profiles/Profiles'
 import ChangePassword from './pages/ChangePassword/ChangePassword'
-import NewQuiz from './pages/NewQuiz/NewQuiz';
+import NewQuiz from './pages/NewQuiz/NewQuiz'
+import QuizList from './pages/QuizList/QuizList'
 
 // components
 import NavBar from './components/NavBar/NavBar'
@@ -21,7 +22,7 @@ import * as authService from './services/authService'
 import './App.css'
 
 // types
-import { User } from './types/models'
+import { User, Quiz } from './types/models'
 
 function App(): JSX.Element {
   const navigate = useNavigate()
