@@ -1,5 +1,6 @@
 // npm modules
 import { NavLink } from 'react-router-dom'
+import './NavBar.module.css'
 
 // types
 import { User } from '../../types/models'
@@ -19,7 +20,7 @@ const NavBar = (props: NavBarProps): JSX.Element => {
           <li>Welcome, {user.name}</li>
           <li><NavLink to="/profiles">Profiles</NavLink></li>
           <li><NavLink to="/change-password">Change Password</NavLink></li>
-          <li><NavLink to="/quiz">Quiz</NavLink></li>
+          <li><NavLink to="/quizzes">Quiz</NavLink></li>
           <li><NavLink to="" onClick={handleLogout}>LOG OUT</NavLink></li>
         </ul>
       :
