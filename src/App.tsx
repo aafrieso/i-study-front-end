@@ -1,49 +1,70 @@
 // npm modules 
-import { useState } from 'react'
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 // page components
-import Signup from './pages/Signup/Signup'
-import Login from './pages/Login/Login'
-import Landing from './pages/Landing/Landing'
-import Profiles from './pages/Profiles/Profiles'
-import ChangePassword from './pages/ChangePassword/ChangePassword'
-import NewQuiz from './pages/NewQuiz/NewQuiz'
-import QuizList from './pages/QuizList/QuizList'
+import Signup from './pages/Signup/Signup';
+import Login from './pages/Login/Login';
+import Landing from './pages/Landing/Landing';
+import Profiles from './pages/Profiles/Profiles';
+import ChangePassword from './pages/ChangePassword/ChangePassword';
+import QuizList from './pages/QuizList/QuizList';
+import NewQuiz from './pages/NewQuiz/NewQuiz';
 
 // components
-import NavBar from './components/NavBar/NavBar'
-import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
+import NavBar from './components/NavBar/NavBar';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 // services
-import * as authService from './services/authService'
-
-// stylesheets
-import './App.css'
+import * as authService from './services/authService';
+import * as quizService from './services/quizService';
 
 // types
-import { User, Quiz } from './types/models'
+import { User, Quiz } from './types/models';
 
 function App(): JSX.Element {
-  const navigate = useNavigate()
-  
-  const [user, setUser] = useState<User | null>(authService.getUser())
+  const navigate = useNavigate();
+
+  const [quizzes, setQuizzes] = useState<Quiz[]>([]);
+
+  useEffect(() => {
+    const fetchQuizzes = async () => {
+      const data = await quizService.index();
+      setQuizzes(data);
+    };
+    fetchQuizzes();
+  }, []);
+
+  const [user, setUser] = useState<User | null>(authService.getUser());
 
   const handleLogout = (): void => {
-    authService.logout()
-    setUser(null)
-    navigate('/')
-  }
+    authService.logout();
+    setUser(null);
+    navigate('/');
+  };
 
   const handleAuthEvt = (): void => {
-    setUser(authService.getUser())
-  }
+    setUser(authService.getUser());
+  };
+
+  const handleAddQuiz = async (data: any): Promise<void> => {
+    const newQuiz: Quiz = await quizService.create(data);
+    setQuizzes([newQuiz, ...quizzes]);
+    navigate('/quizzes');
+  };
 
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<Landing user={user} />} />
+        <Route
+          path="/signup"
+          element={<Signup handleAuthEvt={handleAuthEvt} />}
+        />
+        <Route path='/quizzes/new' element={
+          <NewQuiz handleAddQuiz={handleAddQuiz} />
+        } />
         <Route
           path="/signup"
           element={<Signup handleAuthEvt={handleAuthEvt} />}
@@ -68,17 +89,9 @@ function App(): JSX.Element {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/quizzes"
-          element={
-            <ProtectedRoute user={user}>
-              <Profiles />
-            </ProtectedRoute>
-          }
-        />
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
