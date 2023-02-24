@@ -1,4 +1,5 @@
-import { useState } from "react"
+import './NewQuiz.css'
+import { useState } from 'react';
 
 interface NewQuizProps {
   handleAddQuiz: (quiz: Quiz) => void
@@ -43,7 +44,7 @@ const NewQuiz: React.FC<NewQuizProps> = (props) => {
     <main className="new">
       <h1>NEW QUIZ</h1>
       <form autoComplete="off">
-        <label htmlFor="name-input">Name</label>
+        <label htmlFor="name-input">Class Name:</label>
         <input
           required
           type="text"
@@ -54,7 +55,7 @@ const NewQuiz: React.FC<NewQuizProps> = (props) => {
           onChange={handleChange}
         />
 
-        <label htmlFor="topic-input">Topic</label>
+        <label htmlFor="topic-input">Topic:</label>
         <input
           required
           type="text"
