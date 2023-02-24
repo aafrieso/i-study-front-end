@@ -1,28 +1,26 @@
-import React, { useState } from 'react';
-import './QuizCard.module.css';
+import React from 'react';
 
-interface QuizCardProps {
-  frontContent: JSX.Element;
-  backContent: JSX.Element;
+interface Quiz {
+  question: string;
+  answer: string;
+  difficulty: number;
 }
 
-function QuizCard(props: QuizCardProps) {
-  const [isFlipped, setIsFlipped] = useState(false);
+interface Props {
+  quiz: Quiz;
+}
 
-  function flipCard() {
-    setIsFlipped(!isFlipped);
-  }
+const QuizCard: React.FC<Props> = ({ quiz }) => {
+  const { question, difficulty } = quiz;
 
   return (
-    <div className={`quiz-card ${isFlipped ? 'flipped' : ''}`} onClick={flipCard}>
-      <div className="card-front">
-        {props.frontContent}
-      </div>
-      <div className="card-back">
-        {props.backContent}
-      </div>
-    </div>
+    <li className="card">
+      <h2>{question}</h2>
+      <p>
+        <strong>Difficulty:</strong> {difficulty === 1 ? 'Easy' : difficulty === 2 ? 'Medium' : 'Hard'}
+      </p>
+    </li>
   );
-}
+};
 
 export default QuizCard;

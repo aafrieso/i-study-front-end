@@ -1,6 +1,16 @@
 /* ---------===== custom props ====--------- */
 
+export interface Quiz {
+  question: string;
+  answer: string;
+  difficulty: Difficulty;
+}
 
+export enum Difficulty {
+  EASY = 1,
+  MEDIUM = 2,
+  HARD = 3,
+}
 
 /* ---------===== auth models =====--------- */
 

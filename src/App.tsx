@@ -62,7 +62,7 @@ function App(): JSX.Element {
           path="/signup"
           element={<Signup handleAuthEvt={handleAuthEvt} />}
         />
-        <Route path='/quizzes/new' element={
+        <Route path='/quizzes' element={
           <NewQuiz handleAddQuiz={handleAddQuiz} />
         } />
         <Route
