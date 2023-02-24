@@ -1,39 +1,40 @@
 import React from 'react';
-import QuizCard from '../../components/QuizCard/QuizCard'
 
-interface Quiz {
+interface QuizCardProps {
+  frontContent?: React.ReactNode;
+  backContent?: React.ReactNode;
   question: string;
   answer: string;
   difficulty: number;
 }
 
-enum Difficulty {
-  EASY = 1,
-  MEDIUM = 2,
-  HARD = 3,
-}
+const QuizCard: React.FC<QuizCardProps> = ({ frontContent, backContent, question, answer, difficulty }) => {
+  const [isFlipped, setIsFlipped] = React.useState(false);
 
-interface Props {
-  quiz: Quiz;
-}
+  const handleClick = () => {
+    setIsFlipped(!isFlipped);
+  };
 
-const QuizList: React.FC<{ quizzes: Quiz[] }> = ({ quizzes }) => {
   return (
-    <main className="list">
-      <h1>QUIZ LIST</h1>
-
-      {!quizzes.length && <h2> You Have No quizzes here!</h2>}
-
-      <ul>
-        {quizzes.map((quiz) => (
-          <li key={quiz.question}>
-            <QuizCard quiz={quiz} />
-          </li>
-        ))}
-      </ul>
-
-    </main>
+    <div className={`card ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
+      <div className="front">
+        {frontContent || (
+          <div>
+            <h3>{question}</h3>
+            <p>Difficulty: {difficulty}</p>
+          </div>
+        )}
+      </div>
+      <div className="back">
+        {backContent || (
+          <div>
+            <h3>Answer</h3>
+            <p>{answer}</p>
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 
-export default QuizList;
+export default QuizCard;
