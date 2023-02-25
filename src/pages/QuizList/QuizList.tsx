@@ -1,4 +1,5 @@
 import React from 'react';
+import QuizCard from '../../components/QuizCard/QuizCard';
 
 interface QuizCardProps {
   frontContent?: React.ReactNode;
@@ -8,7 +9,7 @@ interface QuizCardProps {
   difficulty: number;
 }
 
-const QuizCard: React.FC<QuizCardProps> = ({ frontContent, backContent, question, answer, difficulty }) => {
+const CustomQuizCard: React.FC<QuizCardProps> = ({ frontContent, backContent, question, answer, difficulty }) => {
   const [isFlipped, setIsFlipped] = React.useState(false);
 
   const handleClick = () => {
@@ -37,4 +38,5 @@ const QuizCard: React.FC<QuizCardProps> = ({ frontContent, backContent, question
   );
 };
 
-export default QuizCard;
+export default CustomQuizCard;
+

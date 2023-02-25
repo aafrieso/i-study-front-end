@@ -48,7 +48,7 @@ function App(): JSX.Element {
   };
 
   const handleAddQuiz = async (data: any): Promise<void> => {
-    const newQuiz: Quiz = await quizService.create(data);
+    const newQuiz: Quiz = await quizService.createQuiz(data);
     setQuizzes([newQuiz, ...quizzes]);
     navigate('/quizzes');
   };

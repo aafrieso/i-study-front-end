@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface Quiz {
+  id:number;
   question: string;
   answer: string;
   difficulty: number;
