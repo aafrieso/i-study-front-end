@@ -22,7 +22,7 @@ const QuizCard = (props: QuizProps): JSX.Element => {
     <article>
       <div>
         {quizzes.map((quiz: any) =>
-          <div>
+          <div key={quiz.id}>
             <h2>{quiz.question}</h2>
             <p>{quiz.option1}</p>
             <p>{quiz.option2}</p>
