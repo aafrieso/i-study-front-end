@@ -18,19 +18,19 @@ async function index(): Promise<any> {
   }
 }
 
-async function create(formData: QuizFormData): Promise<Quiz> {
+async function create(QuizFormData: any): Promise<any> {
   const response = await fetch(BASE_URL, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${tokenService.getToken()}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(formData),
+    body: JSON.stringify(QuizFormData),
   });
   return await response.json();
 }
 
-async function updateQuiz(quiz: Quiz): Promise<Quiz> {
+async function updateQuiz(quiz: Quiz): Promise<any> {
   const response = await fetch(`${BASE_URL}/${quiz.id}`, {
     method: 'PUT',
     headers: {

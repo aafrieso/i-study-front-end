@@ -60,6 +60,12 @@ function App(): JSX.Element {
     setUser(authService.getUser());
   };
 
+  const handleAddQuiz = async (QuizFormData: any): Promise<void> => {
+    const newQuiz: Quiz = await quizService.create(QuizFormData)
+    setQuizzes([newQuiz, ...quizzes])
+    navigate('/quizzes')
+  }
+
   // const handleAddQuiz = async (): Promise<void> => {
   //   const newQuiz: Quiz = await quizService.create();
   //   setQuizzes([newQuiz, ...quizzes]);
@@ -76,9 +82,7 @@ function App(): JSX.Element {
           element={<Signup handleAuthEvt={handleAuthEvt} />}
         />
         <Route path='/quizzes' element={
-          <NewQuiz quizzes={quizzes} fetchAllQuizzes={fetchAllQuizzes} handleAddQuiz={function (): void {
-            // throw new Error('Function not implemented.');
-          } } />
+          <NewQuiz quizzes={quizzes} fetchAllQuizzes={fetchAllQuizzes} handleAddQuiz={handleAddQuiz} />
         } />
         <Route
           path="/signup"
