@@ -1,5 +1,5 @@
 import './NewQuiz.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { QuizFormData } from '../../types/forms';
 import * as quizService from '../../services/quizService';
 import QuizCard from '../../components/QuizCard/QuizCard';
@@ -50,15 +50,17 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
         option4: '',
         answer: '',
       });
-      // handleAddQuiz();
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   function fetchAllQuizzes(): void {
     throw new Error ("Error")
   }
+
+  // const deleteQuiz = (id: any) => {
+  //   const updatedQuizzes = quizzes.filter(quiz => quiz.id !== id);
+  //   setQuizzes(updatedQuizzes);
+  // };
+  
 
   return (
     <main className="new">
@@ -126,13 +128,17 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
         />
         <button type="submit">SUBMIT</button>
       </form>
-      <QuizCard quizzes={quizzes} fetchAllQuizzes={fetchAllQuizzes} id={undefined} question={''} option1={''} option2={''} option3={''} option4={''} answer={''} />
+      <QuizCard quizzes={quizzes} fetchAllQuizzes={fetchAllQuizzes} id={undefined} question={''} option1={''} option2={''} option3={''} option4={''} answer={''} deleteQuiz={function (id: any): void {
+        throw new Error('Function not implemented.');
+      } } />
+      {/* <QuizCard quizzes={quizzes} deleteQuiz={deleteQuiz} id={undefined} question={''} option1={''} option2={''} option3={''} option4={''} answer={''} fetchAllQuizzes={function (): void { */}
+        {/* throw new Error('Function not implemented.'); */}
+      {/* } } /> */}
+
     </main>
   );
 };
 
 export default NewQuiz;
-function handleAddQuiz() {
-  throw new Error('Function not implemented.');
-}
+
 

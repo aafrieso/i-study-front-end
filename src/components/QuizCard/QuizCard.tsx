@@ -13,10 +13,15 @@ interface QuizProps {
   answer: string;
   quizzes: Quiz[];
   fetchAllQuizzes: () => void
+  deleteQuiz: (id: any) => void
 }
 
 const QuizCard = (props: QuizProps): JSX.Element => {
-  const { quizzes } = props
+  const { quizzes, deleteQuiz } = props
+
+  const handleDeleteQuiz = (id: any) => {
+    deleteQuiz(id);
+  };
 
   return (
     <article>
@@ -29,6 +34,7 @@ const QuizCard = (props: QuizProps): JSX.Element => {
             <p>{quiz.option3}</p>
             <p>{quiz.option4}</p>
             <p>{quiz.answer}</p>
+            <button onClick={() => deleteQuiz(quiz.id)}>Delete Quiz</button>
           </div>
         )}
       </div>

@@ -27,18 +27,6 @@ function App(): JSX.Element {
 
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
 
-  // useEffect((): void => {
-  //   const fetchQuizzes = async (): Promise<void> => {
-  //     try {
-  //       const data: Quiz[] = await quizService.index();
-  //       setQuizzes(data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchQuizzes();
-  // }, []);
-
   const fetchAllQuizzes = async () => {
     const quizData = await quizService.index()
     setQuizzes(quizData)
@@ -65,12 +53,6 @@ function App(): JSX.Element {
     setQuizzes([newQuiz, ...quizzes])
     navigate('/quizzes')
   }
-
-  // const handleAddQuiz = async (): Promise<void> => {
-  //   const newQuiz: Quiz = await quizService.create();
-  //   setQuizzes([newQuiz, ...quizzes]);
-  //   navigate('/quizzes');
-  // };
 
   return (
     <>

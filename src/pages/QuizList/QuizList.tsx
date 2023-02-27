@@ -11,9 +11,6 @@ interface QuizListProps {
   option4: string;
   answer: string;
 }
-//const CustomQuizCard = (props: QuizListProps): JSX.Element => {
-
-
 
 const CustomQuizCard: React.FC<QuizListProps> = ({ frontContent, backContent, question, option1, option2, option3, option4, answer }) => {
   const [isFlipped, setIsFlipped] = React.useState(false);
