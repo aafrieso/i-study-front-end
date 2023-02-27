@@ -1,18 +1,22 @@
+import * as tokenService from './tokenService'
+
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/api/quizzes`;
 import { Quiz } from '../types/models'
+import { QuizFormData } from '../types/forms';
 
-async function index(): Promise<any> {
+async function index(): Promise<Quiz[]> {
   const res = await fetch(BASE_URL);
   return res.json();
 }
 
-async function createQuiz(quiz: Quiz): Promise<Quiz> {
+async function create(formData: QuizFormData): Promise<Quiz> {
   const response = await fetch(BASE_URL, {
     method: 'POST',
     headers: {
+      'Authorization': `Bearer ${tokenService.getToken()}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(quiz),
+    body: JSON.stringify(formData),
   });
   return await response.json();
 }
@@ -36,7 +40,7 @@ async function deleteQuiz(id: number): Promise<void> {
 
 export { 
   index,
-  createQuiz,
+  create,
   updateQuiz,
   deleteQuiz
   };

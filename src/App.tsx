@@ -27,13 +27,18 @@ function App(): JSX.Element {
 
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
 
-  useEffect(() => {
-    const fetchQuizzes = async () => {
-      const data = await quizService.index();
-      setQuizzes(data);
-    };
-    fetchQuizzes();
-  }, []);
+  // useEffect((): void => {
+  //   const fetchQuizzes = async (): Promise<void> => {
+  //     try {
+  //       const data: Quiz[] = await quizService.index();
+  //       setQuizzes(data);
+  //     } catch (error) {
+  //       console.log(error);
+        
+  //     }
+  //   };
+  //   fetchQuizzes();
+  // }, []);
 
   const [user, setUser] = useState<User | null>(authService.getUser());
 
@@ -47,11 +52,11 @@ function App(): JSX.Element {
     setUser(authService.getUser());
   };
 
-  const handleAddQuiz = async (data: any): Promise<void> => {
-    const newQuiz: Quiz = await quizService.createQuiz(data);
-    setQuizzes([newQuiz, ...quizzes]);
-    navigate('/quizzes');
-  };
+  // const handleAddQuiz = async (): Promise<void> => {
+  //   const newQuiz: Quiz = await quizService.create();
+  //   setQuizzes([newQuiz, ...quizzes]);
+  //   navigate('/quizzes');
+  // };
 
   return (
     <>
@@ -63,7 +68,8 @@ function App(): JSX.Element {
           element={<Signup handleAuthEvt={handleAuthEvt} />}
         />
         <Route path='/quizzes' element={
-          <NewQuiz handleAddQuiz={handleAddQuiz} />
+          // <NewQuiz handleAddQuiz={handleAddQuiz} />
+          <NewQuiz />
         } />
         <Route
           path="/signup"
