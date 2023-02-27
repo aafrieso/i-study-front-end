@@ -2,13 +2,27 @@ import './NewQuiz.css';
 import { useState } from 'react';
 import { QuizFormData } from '../../types/forms';
 import * as quizService from '../../services/quizService';
+import QuizCard from '../../components/QuizCard/QuizCard';
+import { Quiz } from '../../types/models';
 
 interface NewQuizProps {
-  handleAddQuiz: () => void;
+  handleAddQuiz: (QuizData: QuizData) => void;
+  fetchAllQuizzes: () => void;
+  quizzes: Quiz[];
 }
 
-const NewQuiz: React.FC<NewQuizProps> = ({ handleAddQuiz }) => {
-  const [form, setForm] = useState<QuizFormData>({
+interface QuizData {
+  question: string;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
+  answer: string;
+}
+
+const NewQuiz = (props: NewQuizProps): JSX.Element => {
+  const { quizzes } = props
+  const [form, setForm] = useState<QuizData>({
     question: '',
     option1: '',
     option2: '',
@@ -27,8 +41,7 @@ const NewQuiz: React.FC<NewQuizProps> = ({ handleAddQuiz }) => {
 
   const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>): Promise<void> => {
     evt.preventDefault();
-    try {
-      await quizService.create(form);
+    props.handleAddQuiz(form)
       setForm({
         question: '',
         option1: '',
@@ -37,11 +50,15 @@ const NewQuiz: React.FC<NewQuizProps> = ({ handleAddQuiz }) => {
         option4: '',
         answer: '',
       });
-      handleAddQuiz();
-    } catch (error) {
-      console.log(error);
-    }
+      // handleAddQuiz();
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
+
+  function fetchAllQuizzes(): void {
+    throw new Error ("Error")
+  }
 
   return (
     <main className="new">
@@ -109,8 +126,13 @@ const NewQuiz: React.FC<NewQuizProps> = ({ handleAddQuiz }) => {
         />
         <button type="submit">SUBMIT</button>
       </form>
+      <QuizCard quizzes={quizzes} fetchAllQuizzes={fetchAllQuizzes} id={undefined} question={''} option1={''} option2={''} option3={''} option4={''} answer={''} />
     </main>
   );
 };
 
 export default NewQuiz;
+function handleAddQuiz() {
+  throw new Error('Function not implemented.');
+}
+

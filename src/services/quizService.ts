@@ -4,9 +4,18 @@ const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/api/quizzes`;
 import { Quiz } from '../types/models'
 import { QuizFormData } from '../types/forms';
 
-async function index(): Promise<Quiz[]> {
-  const res = await fetch(BASE_URL);
-  return res.json();
+async function index(): Promise<any> {
+  try {
+    const res = await fetch(BASE_URL, {
+      headers: {
+        'Authorization': `Bearer ${tokenService.getToken()}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    return await res.json()
+  } catch (error) {
+    throw error
+  }
 }
 
 async function create(formData: QuizFormData): Promise<Quiz> {

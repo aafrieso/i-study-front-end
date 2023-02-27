@@ -1,6 +1,7 @@
 /* ---------===== custom props ====--------- */
 
 export interface Quiz {
+  [x: string]: any;
   id: any;
   question: string;
   option1: string;
