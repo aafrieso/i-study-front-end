@@ -18,6 +18,8 @@ import * as quizService from './services/quizService';
 import { User, Quiz } from './types/models';
 import { QuizFormData } from './types/forms';
 
+import styles from './App.Module.css'
+
 function App(): JSX.Element {
   const navigate = useNavigate();
 
@@ -59,9 +61,6 @@ function App(): JSX.Element {
 
   const handleUpdateQuiz = async (quizData: QuizFormData): Promise<void> => {
     await quizService.update(quizData);
-    // setQuizzes((prevQuizzes) =>
-    //   prevQuizzes.map((quiz) => (quiz.id === newQuiz.id ? newQuiz : quiz))
-    // );
 
     const updatedQuiz = await quizService.index()
     setQuizzes(updatedQuiz)

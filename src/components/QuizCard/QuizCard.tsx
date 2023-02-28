@@ -33,7 +33,7 @@ const QuizCard = (props: QuizProps): JSX.Element => {
             <p>{quiz.option4}</p>
             <p>{quiz.answer}</p>
             <button onClick={() => props.handleDeleteQuiz(quiz.id)}>Delete Quiz</button>
-            <Link to={`/quizzes/${quiz.id}`}>
+            <Link to={`/quizzes/${quiz.id}`} state={{quiz}}>
             <button onClick={() => props}>Update Quiz</button>
             </Link>
           </div>
