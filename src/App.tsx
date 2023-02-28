@@ -54,6 +54,16 @@ function App(): JSX.Element {
     navigate('/quizzes')
   }
 
+  const handleDeleteQuiz = async (id: number): Promise<void> => {
+    try {
+      await quizService.deleteQuiz(id)
+      const updatedQuiz = quizzes.filter((quiz: any) => quiz.id !== id)
+      setQuizzes(updatedQuiz)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
@@ -64,7 +74,7 @@ function App(): JSX.Element {
           element={<Signup handleAuthEvt={handleAuthEvt} />}
         />
         <Route path='/quizzes' element={
-          <NewQuiz quizzes={quizzes} fetchAllQuizzes={fetchAllQuizzes} handleAddQuiz={handleAddQuiz} />
+          <NewQuiz quizzes={quizzes} fetchAllQuizzes={fetchAllQuizzes} handleAddQuiz={handleAddQuiz} handleDeleteQuiz={handleDeleteQuiz} />
         } />
         <Route
           path="/signup"

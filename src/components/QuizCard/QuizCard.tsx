@@ -1,9 +1,10 @@
 import React from 'react'
 
 // types
-import { Quiz } from "../../types/models"
+import { Quiz, User } from "../../types/models"
 
 interface QuizProps {
+  handleDeleteQuiz(id: any): void;
   id: any;
   question: string;
   option1: string;
@@ -13,15 +14,15 @@ interface QuizProps {
   answer: string;
   quizzes: Quiz[];
   fetchAllQuizzes: () => void
-  deleteQuiz: (id: any) => void
+  handleDeleteQuiz: (id: any) => void
 }
 
 const QuizCard = (props: QuizProps): JSX.Element => {
-  const { quizzes, deleteQuiz } = props
+  const { quizzes } = props
 
-  const handleDeleteQuiz = (id: any) => {
-    deleteQuiz(id);
-  };
+  // const handleDeleteQuiz = (id: any) => {
+  //   deleteQuiz(id);
+  // };
 
   return (
     <article>
@@ -34,7 +35,7 @@ const QuizCard = (props: QuizProps): JSX.Element => {
             <p>{quiz.option3}</p>
             <p>{quiz.option4}</p>
             <p>{quiz.answer}</p>
-            <button onClick={() => deleteQuiz(quiz.id)}>Delete Quiz</button>
+            <button role="button" onClick={() => props.handleDeleteQuiz(quiz.id)}>Delete Quiz</button>
           </div>
         )}
       </div>

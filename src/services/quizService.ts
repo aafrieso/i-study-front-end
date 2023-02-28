@@ -41,16 +41,23 @@ async function updateQuiz(quiz: Quiz): Promise<any> {
   return await response.json();
 }
 
-async function deleteQuiz(id: number): Promise<void> {
-  await fetch(`${BASE_URL}/${id}`, {
-    method: 'DELETE',
-  });
+const deleteQuiz = async (id: any): Promise<any> => {
+  try {
+    const res = await fetch (`${BASE_URL}/${id}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${tokenService.getToken()}` }
+    });
+    return res.json();
+  } catch (error) {
+    throw error 
+  }
 }
 
 export { 
   index,
   create,
   updateQuiz,
-  deleteQuiz
+  deleteQuiz 
   };
+
 

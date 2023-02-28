@@ -9,6 +9,7 @@ interface NewQuizProps {
   handleAddQuiz: (QuizData: QuizData) => void;
   fetchAllQuizzes: () => void;
   quizzes: Quiz[];
+  handleDeleteQuiz: (id: number) => void
 }
 
 interface QuizData {
@@ -58,10 +59,9 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
 
   // const deleteQuiz = (id: any) => {
   //   const updatedQuizzes = quizzes.filter(quiz => quiz.id !== id);
-  //   setQuizzes(updatedQuizzes);
+  //   Quizzes(updatedQuizzes);
   // };
   
-
   return (
     <main className="new">
       <h1>NEW QUIZ HERE</h1>
@@ -128,16 +128,15 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
         />
         <button type="submit">SUBMIT</button>
       </form>
-      <QuizCard quizzes={quizzes} fetchAllQuizzes={fetchAllQuizzes} id={undefined} question={''} option1={''} option2={''} option3={''} option4={''} answer={''} deleteQuiz={function (id: any): void {
-        throw new Error('Function not implemented.');
-      } } />
-      {/* <QuizCard quizzes={quizzes} deleteQuiz={deleteQuiz} id={undefined} question={''} option1={''} option2={''} option3={''} option4={''} answer={''} fetchAllQuizzes={function (): void { */}
-        {/* throw new Error('Function not implemented.'); */}
-      {/* } } /> */}
+      <QuizCard quizzes={quizzes} fetchAllQuizzes={fetchAllQuizzes} id={undefined} question={''} option1={''} option2={''} option3={''} option4={''} answer={''}
+      handleDeleteQuiz={props.handleDeleteQuiz} />
 
     </main>
   );
 };
+// handleDeleteQuiz={function (id: any): void {
+//   throw new Error('Function not implemented.');
+// } }
 
 export default NewQuiz;
 
