@@ -1,7 +1,7 @@
 import React from 'react'
 
 // types
-import { Quiz, User } from "../../types/models"
+import { Quiz } from "../../types/models"
 
 interface QuizProps {
   handleDeleteQuiz(id: any): void;
@@ -20,10 +20,6 @@ interface QuizProps {
 const QuizCard = (props: QuizProps): JSX.Element => {
   const { quizzes } = props
 
-  // const handleDeleteQuiz = (id: any) => {
-  //   deleteQuiz(id);
-  // };
-
   return (
     <article>
       <div>
@@ -35,7 +31,7 @@ const QuizCard = (props: QuizProps): JSX.Element => {
             <p>{quiz.option3}</p>
             <p>{quiz.option4}</p>
             <p>{quiz.answer}</p>
-            <button role="button" onClick={() => props.handleDeleteQuiz(quiz.id)}>Delete Quiz</button>
+            <button onClick={() => props.handleDeleteQuiz(quiz.id)}>Delete Quiz</button>
           </div>
         )}
       </div>

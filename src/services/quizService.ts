@@ -34,6 +34,7 @@ async function update(quiz: Quiz): Promise<any> {
   const response = await fetch(`${BASE_URL}/${quiz.id}`, {
     method: 'PUT',
     headers: {
+      'Authorization': `Bearer ${tokenService.getToken()}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(quiz),
