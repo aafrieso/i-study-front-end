@@ -30,7 +30,7 @@ async function create(QuizFormData: any): Promise<any> {
   return await response.json();
 }
 
-async function updateQuiz(quiz: Quiz): Promise<any> {
+async function update(quiz: Quiz): Promise<any> {
   const response = await fetch(`${BASE_URL}/${quiz.id}`, {
     method: 'PUT',
     headers: {
@@ -56,7 +56,7 @@ const deleteQuiz = async (id: any): Promise<any> => {
 export { 
   index,
   create,
-  updateQuiz,
+  update,
   deleteQuiz 
   };
 
