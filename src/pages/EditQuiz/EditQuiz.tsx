@@ -1,117 +1,119 @@
-import { useState } from "react";
+import React, { useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { QuizFormData } from '../../types/forms';
+import * as quizService from '../../services/quizService';
 
-import styles from "./EditQuiz.module.css";
-
-interface Quiz {
-  id: string;
-  question: string;
-  option1: string;
-  option2: string;
-  option3: string;
-  option4: string;
-  answer: string;
+interface EditQuizCardProps {
+  handleUpdateQuiz: (updatedQuiz: QuizFormData) => void;
 }
 
-interface Props {
-  quiz: Quiz;
-  handleUpdateQuiz: (id: any, updatedQuiz: Quiz) => void;
-}
+const EditQuizCard = ( props: EditQuizCardProps): JSX.Element => {
+  const { id } = useParams();
+  const{state}=useLocation()
+  // const [form, setForm] = useState<QuizFormData>({
+  //   question: '',
+  //   option1: '',
+  //   option2: '',
+  //   option3: '',
+  //   option4: '',
+  //   answer: '',
+  // });
 
-const EditQuizCard: React.FC<Props> = ({ quiz, handleUpdateQuiz }) => {
-  const [form, setForm] = useState<Quiz>(quiz);
+  const [form, setForm] = useState<QuizFormData>( state )
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setForm((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  const navigate = useNavigate();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    // const { name, value } = e.target;
+    // setForm(prevState => ({
+    //   ...prevState,
+    //   [name]: value,
+    // }));
+
+    setForm({...form, [e.target.name]: e.target.value})
   };
 
-  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>): Promise<void> => {
     evt.preventDefault();
-    handleUpdateQuiz(parseInt(form.id), form);
-    setForm({
-      id: quiz.id,
-      question: "",
-      option1: "",
-      option2: "",
-      option3: "",
-      option4: "",
-      answer: "",
-    });
+    // try {
+    //   await handleUpdateQuiz(parseInt(id), form);
+    //   navigate('/quizzes');
+    // } catch (err) {
+    //   console.log(err);
+    // }
+
+    props.handleUpdateQuiz(form)
   };
+  
 
   return (
-    <main className={`${styles.container} new`}>
+    <main>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <h1>EDIT QUIZ</h1>
 
-        <label htmlFor="question-input">Question</label>
+        <label>Question</label>
         <input
           required
-          type="text"
+          type="string"
           name="question"
           id="question-input"
           placeholder="Question"
-          value={form.question}
+          // value={form.question}
           onChange={handleChange}
         />
 
-        <label htmlFor="option1-input">Option 1</label>
+        <label>Option 1</label>
         <input
           required
-          type="text"
+          type="string"
           name="option1"
           id="option1-input"
           placeholder="Option 1"
-          value={form.option1}
+          // value={form.option1}
           onChange={handleChange}
         />
 
-        <label htmlFor="option2-input">Option 2</label>
+        <label>Option 2</label>
         <input
           required
-          type="text"
+          type="string"
           name="option2"
           id="option2-input"
           placeholder="Option 2"
-          value={form.option2}
+          // value={form.option2}
           onChange={handleChange}
         />
 
-        <label htmlFor="option3-input">Option 3</label>
+        <label>Option 3</label>
         <input
           required
-          type="text"
+          type="string"
           name="option3"
           id="option3-input"
           placeholder="Option 3"
-          value={form.option3}
+          // value={form.option3}
           onChange={handleChange}
         />
 
-        <label htmlFor="option4-input">Option 4</label>
+        <label>Option 4</label>
         <input
           required
-          type="text"
+          type="string"
           name="option4"
           id="option4-input"
           placeholder="Option 4"
-          value={form.option4}
+          // value={form.option4}
           onChange={handleChange}
         />
 
-        <label htmlFor="answer-input">Answer</label>
+        <label>Answer</label>
         <input
           required
-          type="text"
+          type="string"
           name="answer"
           id="answer-input"
           placeholder="Answer"
-          value={form.answer}
+          // value={form.answer}
           onChange={handleChange}
         />
 

@@ -30,14 +30,14 @@ async function create(QuizFormData: any): Promise<any> {
   return await response.json();
 }
 
-async function update(quiz: Quiz): Promise<any> {
-  const response = await fetch(`${BASE_URL}/${quiz.id}`, {
+async function update(quizData: QuizFormData): Promise<any> {
+  const response = await fetch(`${BASE_URL}/${quizData.id}`, {
     method: 'PUT',
     headers: {
       'Authorization': `Bearer ${tokenService.getToken()}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(quiz),
+    body: JSON.stringify(quizData),
   });
   return await response.json();
 }

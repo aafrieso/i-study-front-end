@@ -1,11 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+import { QuizFormData } from '../../types/forms';
 
 // types
 import { Quiz } from "../../types/models"
 
 interface QuizProps {
-  handleDeleteQuiz(id: any): void;
-  id: any;
   question: string;
   option1: string;
   option2: string;
@@ -13,8 +13,9 @@ interface QuizProps {
   option4: string;
   answer: string;
   quizzes: Quiz[];
-  fetchAllQuizzes: () => void
-  handleDeleteQuiz: (id: any) => void
+  // fetchAllQuizzes: () => void
+  handleDeleteQuiz: (id: number) => void
+  // handleUpdateQuiz: (quizData: QuizFormData) => void;
 }
 
 const QuizCard = (props: QuizProps): JSX.Element => {
@@ -23,7 +24,7 @@ const QuizCard = (props: QuizProps): JSX.Element => {
   return (
     <article>
       <div>
-        {quizzes.map((quiz: any) =>
+        {quizzes.map((quiz: Quiz) =>
           <div key={quiz.id}>
             <h2>{quiz.question}</h2>
             <p>{quiz.option1}</p>
@@ -32,6 +33,9 @@ const QuizCard = (props: QuizProps): JSX.Element => {
             <p>{quiz.option4}</p>
             <p>{quiz.answer}</p>
             <button onClick={() => props.handleDeleteQuiz(quiz.id)}>Delete Quiz</button>
+            <Link to={`/quizzes/${quiz.id}`}>
+            <button onClick={() => props}>Update Quiz</button>
+            </Link>
           </div>
         )}
       </div>

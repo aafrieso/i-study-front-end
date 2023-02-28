@@ -1,42 +1,36 @@
-// npm modules 
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
-// page components
 import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import Landing from './pages/Landing/Landing';
 import Profiles from './pages/Profiles/Profiles';
 import ChangePassword from './pages/ChangePassword/ChangePassword';
-import QuizList from './pages/QuizList/QuizList';
 import NewQuiz from './pages/NewQuiz/NewQuiz';
+import EditQuizCard from './pages/EditQuiz/EditQuiz';
 
-// components
 import NavBar from './components/NavBar/NavBar';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
-// services
 import * as authService from './services/authService';
 import * as quizService from './services/quizService';
 
-// types
 import { User, Quiz } from './types/models';
+import { QuizFormData } from './types/forms';
 
 function App(): JSX.Element {
   const navigate = useNavigate();
 
+  const [user, setUser] = useState<User | null>(authService.getUser());
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
 
-  const fetchAllQuizzes = async () => {
-    const quizData = await quizService.index()
-    setQuizzes(quizData)
-  }
-
+  const fetchQuizzes = async () => {
+    const quizData = await quizService.index();
+    setQuizzes(quizData);
+  };
   useEffect(() => {
-    fetchAllQuizzes()
-  }, [])
-
-  const [user, setUser] = useState<User | null>(authService.getUser());
+    fetchQuizzes();
+  }, []);
 
   const handleLogout = (): void => {
     authService.logout();
@@ -48,42 +42,43 @@ function App(): JSX.Element {
     setUser(authService.getUser());
   };
 
-  const handleAddQuiz = async (QuizFormData: any): Promise<void> => {
-    const newQuiz: Quiz = await quizService.create(QuizFormData)
-    setQuizzes([newQuiz, ...quizzes])
-    navigate('/quizzes')
-  }
+  const handleAddQuiz = async (quizData: QuizFormData): Promise<void> => {
+    const newQuiz = await quizService.create(quizData);
+    setQuizzes([newQuiz, ...quizzes]);
+    navigate('/quizzes');
+  };
 
   const handleDeleteQuiz = async (id: number): Promise<void> => {
     try {
-      await quizService.deleteQuiz(id)
-      const updatedQuiz = quizzes.filter((quiz: any) => quiz.id !== id)
-      setQuizzes(updatedQuiz)
+      await quizService.deleteQuiz(id);
+      setQuizzes((prevQuizzes) => prevQuizzes.filter((quiz) => quiz.id !== id));
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
+
+  const handleUpdateQuiz = async (quizData: QuizFormData): Promise<void> => {
+    await quizService.update(quizData);
+    // setQuizzes((prevQuizzes) =>
+    //   prevQuizzes.map((quiz) => (quiz.id === newQuiz.id ? newQuiz : quiz))
+    // );
+
+    const updatedQuiz = await quizService.index()
+    setQuizzes(updatedQuiz)
+    navigate('/quizzes');
+  };
 
   return (
     <>
       <NavBar user={user} handleLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<Landing user={user} />} />
+        <Route path="/signup" element={<Signup handleAuthEvt={handleAuthEvt} />} />
         <Route
-          path="/signup"
-          element={<Signup handleAuthEvt={handleAuthEvt} />}
+          path="/quizzes"
+          element={<NewQuiz quizzes={quizzes} handleAddQuiz={handleAddQuiz} handleDeleteQuiz={handleDeleteQuiz} />}
         />
-        <Route path='/quizzes' element={
-          <NewQuiz quizzes={quizzes} fetchAllQuizzes={fetchAllQuizzes} handleAddQuiz={handleAddQuiz} handleDeleteQuiz={handleDeleteQuiz} />
-        } />
-        <Route
-          path="/signup"
-          element={<Signup handleAuthEvt={handleAuthEvt} />}
-        />
-        <Route
-          path="/login"
-          element={<Login handleAuthEvt={handleAuthEvt} />}
-        />
+        <Route path="/login" element={<Login handleAuthEvt={handleAuthEvt} />} />
         <Route
           path="/profiles"
           element={
@@ -97,6 +92,14 @@ function App(): JSX.Element {
           element={
             <ProtectedRoute user={user}>
               <ChangePassword handleAuthEvt={handleAuthEvt} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/quizzes/:id"
+          element={
+            <ProtectedRoute user={user}>
+              <EditQuizCard handleUpdateQuiz={handleUpdateQuiz} />
             </ProtectedRoute>
           }
         />

@@ -7,9 +7,10 @@ import { Quiz } from '../../types/models';
 
 interface NewQuizProps {
   handleAddQuiz: (QuizData: QuizData) => void;
-  fetchAllQuizzes: () => void;
+  // fetchAllQuizzes: () => void;
   quizzes: Quiz[];
   handleDeleteQuiz: (id: number) => void
+  // handleUpdateQuiz: (quizData: QuizFormData) => void;
 }
 
 interface QuizData {
@@ -32,13 +33,18 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
     answer: '',
   });
 
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  //   const { name, value } = e.target;
+  //   setForm(prevState => ({
+  //     ...prevState,
+  //     [name]: value,
+  //   }));
+  // };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = e.target;
-    setForm(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
+    setForm({...form, [e.target.name]: e.target.value})
   };
+
 
   const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>): Promise<void> => {
     evt.preventDefault();
@@ -53,14 +59,9 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
       });
   };
 
-  function fetchAllQuizzes(): void {
-    throw new Error ("Error")
-  }
-
-  // const deleteQuiz = (id: any) => {
-  //   const updatedQuizzes = quizzes.filter(quiz => quiz.id !== id);
-  //   Quizzes(updatedQuizzes);
-  // };
+  // function fetchAllQuizzes(): void {
+  //   throw new Error ("Error")
+  // }
   
   return (
     <main className="new">
@@ -128,15 +129,14 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
         />
         <button type="submit">SUBMIT</button>
       </form>
-      <QuizCard quizzes={quizzes} fetchAllQuizzes={fetchAllQuizzes} id={undefined} question={''} option1={''} option2={''} option3={''} option4={''} answer={''}
-      handleDeleteQuiz={props.handleDeleteQuiz} />
-
+      <QuizCard quizzes={quizzes}
+      // fetchAllQuizzes={fetchAllQuizzes}
+      handleDeleteQuiz={props.handleDeleteQuiz} question={''} option1={''} option2={''} option3={''} option4={''} answer={''}      
+        // handleUpdateQuiz={props.handleUpdateQuiz}
+      />
     </main>
   );
 };
-// handleDeleteQuiz={function (id: any): void {
-//   throw new Error('Function not implemented.');
-// } }
 
 export default NewQuiz;
 
