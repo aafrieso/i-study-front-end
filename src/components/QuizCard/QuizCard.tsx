@@ -46,6 +46,11 @@ const QuizCard = (props: QuizProps): JSX.Element => {
               <p>{quiz.option2}</p>
               <p>{quiz.option3}</p>
               <p>{quiz.option4}</p>
+              {quiz.profileId === user?.profile.id &&
+                <button onClick={() => props.handleDeleteQuiz(quiz.id)}>
+                  Delete Quiz
+                </button>
+              }
             </div>
             <div className={styles.back}>
               <h1>
@@ -53,9 +58,6 @@ const QuizCard = (props: QuizProps): JSX.Element => {
               </h1>
               {quiz.profileId === user?.profile.id &&
                 <div>
-                  <button onClick={() => props.handleDeleteQuiz(quiz.id)}>
-                    Delete Quiz
-                  </button>
                   <Link to={`/quizzes/${quiz.id}`} state={{ quiz }}>
                     <button onClick={() => props}>Update Quiz</button>
                   </Link>
