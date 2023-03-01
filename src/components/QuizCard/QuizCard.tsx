@@ -15,36 +15,60 @@ interface QuizProps {
 }
 
 const QuizCard = (props: QuizProps): JSX.Element => {
-  const { quizzes } = props
-  const [isFlipped, setIsFlipped] = useState(false);
+  const { quizzes } = props;
+  const [flippedCard, setFlippedCard] = useState<number>(-1);
+
+  const handleCardClick = (index: number) => {
+    if (flippedCard === index) {
+      setFlippedCard(-1);
+    } else {
+      setFlippedCard(index);
+      if (flippedCard >= 0) {
+        setTimeout(() => setFlippedCard(-1), 1000);
+      }
+    }
+  };
 
   return (
     <article className={styles.container}>
       <div>
-        {quizzes.map((quiz: Quiz) =>
-          <div className={`${styles.card} ${isFlipped ? styles['card-flip'] : ''}`} key={quiz.id} onClick={() => setIsFlipped(!isFlipped)}>
+        {quizzes.map((quiz: Quiz, index: number) => (
+          <div
+            className={`${
+              styles.card
+            } ${flippedCard === index ? styles["card-flip"] : ""}`}
+            key={quiz.id}
+            onClick={() => handleCardClick(index)}
+          >
             <div className={styles.front}>
               <h2>Q: {quiz.question}</h2>
               <p>{quiz.option1}</p>
               <p>{quiz.option2}</p>
               <p>{quiz.option3}</p>
               <p>{quiz.option4}</p>
-              <button onClick={() => props.handleDeleteQuiz(quiz.id)}>Delete Quiz</button>
-              <div className="link-wrapper">
-                <Link to={`/quizzes/${quiz.id}`} state={{ quiz }}>
-                  <button className={styles['update-btn']}>Update Quiz</button>
-                </Link>
-              </div>
+              <button onClick={() => props.handleDeleteQuiz(quiz.id)}>
+                Delete Quiz
+              </button>
+              <Link to={`/quizzes/${quiz.id}`} state={{ quiz }}>
+                <button onClick={() => props}>Update Quiz</button>
+              </Link>
             </div>
             <div className={styles.back}>
-              <p><b>A: {quiz.answer}</b></p>
+              <h1>
+                <b>A: {quiz.answer}</b>
+              </h1>
+              <button onClick={() => props.handleDeleteQuiz(quiz.id)}>
+                Delete Quiz
+              </button>
+              <Link to={`/quizzes/${quiz.id}`} state={{ quiz }}>
+                <button onClick={() => props}>Update Quiz</button>
+              </Link>
             </div>
           </div>
-        )}
+        ))}
       </div>
     </article>
-  )
-}
+  );
+};
 
-
-export default QuizCard
+export default QuizCard;
