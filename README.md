@@ -2,7 +2,7 @@
 
 ![iStudy Screenshot](src/assets/app2pic.png)
 
-![iStudy Screenshot](src/assets/app3pic.png)
+![iStudy Screenshot](src/assets/app3.png)
 
 📌 iStudy is designed for anyone who loves testing their knowledge in a fun and engaging way. It features the ability to make quizzes on a wide range of topics, from Geography and science to pop culture and sports. iStudy allows users to tailor their quiz-taking experience to their interests and preferences. Simply click the card to reveal the answer.
 
