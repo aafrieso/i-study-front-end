@@ -1,0 +1,25 @@
+.container h1 {
+  display: flex;
+  justify-content: center;
+  margin-top: 250px;
+}
+
+.container form {
+  display: flex;
+  flex-direction: column;
+  margin: 40px;
+  align-items: center;
+  align-content: center;
+}
+
+.container label {
+  margin: 5px;
+}
+
+.container input {
+  margin: 5px;
+}
+
+.container button {
+  margin: 6px;
+}

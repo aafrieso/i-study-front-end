@@ -1,16 +1,12 @@
 import './NewQuiz.css';
 import React, { useState } from 'react';
-import { QuizFormData } from '../../types/forms';
-import * as quizService from '../../services/quizService';
 import QuizCard from '../../components/QuizCard/QuizCard';
 import { Quiz } from '../../types/models';
 
 interface NewQuizProps {
   handleAddQuiz: (QuizData: QuizData) => void;
-  // fetchAllQuizzes: () => void;
   quizzes: Quiz[];
   handleDeleteQuiz: (id: number) => void
-  // handleUpdateQuiz: (quizData: QuizFormData) => void;
 }
 
 interface QuizData {
@@ -33,14 +29,6 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
     answer: '',
   });
 
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-  //   const { name, value } = e.target;
-  //   setForm(prevState => ({
-  //     ...prevState,
-  //     [name]: value,
-  //   }));
-  // };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setForm({...form, [e.target.name]: e.target.value})
   };
@@ -58,14 +46,10 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
         answer: '',
       });
   };
-
-  // function fetchAllQuizzes(): void {
-  //   throw new Error ("Error")
-  // }
   
   return (
     <main className="new">
-      <h1>NEW QUIZ HERE</h1>
+      <h1>Add NEW QUIZ HERE</h1>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <label htmlFor="question-input">Question:</label>
         <input
@@ -130,9 +114,7 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
         <button type="submit">SUBMIT</button>
       </form>
       <QuizCard quizzes={quizzes}
-      // fetchAllQuizzes={fetchAllQuizzes}
       handleDeleteQuiz={props.handleDeleteQuiz} question={''} option1={''} option2={''} option3={''} option4={''} answer={''}      
-        // handleUpdateQuiz={props.handleUpdateQuiz}
       />
     </main>
   );

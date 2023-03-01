@@ -13,9 +13,7 @@ interface QuizProps {
   option4: string;
   answer: string;
   quizzes: Quiz[];
-  // fetchAllQuizzes: () => void
   handleDeleteQuiz: (id: number) => void
-  // handleUpdateQuiz: (quizData: QuizFormData) => void;
 }
 
 const QuizCard = (props: QuizProps): JSX.Element => {
