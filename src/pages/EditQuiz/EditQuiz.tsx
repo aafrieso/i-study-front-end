@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { QuizFormData } from '../../types/forms';
+import { User } from '../../types/models';
 
 interface EditQuizCardProps {
   handleUpdateQuiz: (updatedQuiz: QuizFormData) => void;
+  user: User | null;
 }
 
 const EditQuizCard = ( props: EditQuizCardProps): JSX.Element => {
-  const location = useLocation()
-  const {quiz} = location.state
+  const { user } = props
   
-  const [form, setForm] = useState<QuizFormData>( quiz )
+  const location = useLocation();
+
+  const {quiz} = location.state;
+  
+  const [form, setForm] = useState<QuizFormData>(quiz);
 
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 
-    setForm({...form, [e.target.name]: e.target.value})
+    setForm({...form, [e.target.name]: e.target.value});
   };
 
   const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>): Promise<void> => {

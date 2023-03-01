@@ -1,12 +1,13 @@
 import './NewQuiz.css';
 import React, { useState } from 'react';
 import QuizCard from '../../components/QuizCard/QuizCard';
-import { Quiz } from '../../types/models';
+import { Quiz, User } from '../../types/models';
 
 interface NewQuizProps {
   handleAddQuiz: (QuizData: QuizData) => void;
   quizzes: Quiz[];
   handleDeleteQuiz: (id: number) => void;
+  user: User | null;
 }
 
 interface QuizData {
@@ -19,7 +20,7 @@ interface QuizData {
 }
 
 const NewQuiz = (props: NewQuizProps): JSX.Element => {
-  const { quizzes } = props
+  const { quizzes, user } = props
   const [form, setForm] = useState<QuizData>({
     question: '',
     option1: '',
@@ -114,7 +115,7 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
         <button type="submit">SUBMIT</button>
       </form>
       <QuizCard quizzes={quizzes}
-      handleDeleteQuiz={props.handleDeleteQuiz} question={''} option1={''} option2={''} option3={''} option4={''} answer={''}      
+      handleDeleteQuiz={props.handleDeleteQuiz} question={''} option1={''} option2={''} option3={''} option4={''} answer={''} user={user}      
       />
     </main>
   );

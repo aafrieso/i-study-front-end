@@ -3,6 +3,7 @@
 export interface Quiz {
   [x: string]: any;
   id: any;
+  profileId: number;
   question: string;
   option1: string;
   option2: string;

@@ -59,8 +59,8 @@ function App(): JSX.Element {
   const handleUpdateQuiz = async (quizData: QuizFormData): Promise<void> => {
     await quizService.update(quizData);
 
-    const updatedQuiz = await quizService.index()
-    setQuizzes(updatedQuiz)
+    const updatedQuiz = await quizService.index();
+    setQuizzes(updatedQuiz);
     navigate('/quizzes');
   };
 
@@ -72,7 +72,7 @@ function App(): JSX.Element {
         <Route path="/signup" element={<Signup handleAuthEvt={handleAuthEvt} />} />
         <Route
           path="/quizzes"
-          element={<NewQuiz quizzes={quizzes} handleAddQuiz={handleAddQuiz} handleDeleteQuiz={handleDeleteQuiz} />}
+          element={<NewQuiz quizzes={quizzes} handleAddQuiz={handleAddQuiz} handleDeleteQuiz={handleDeleteQuiz}  user={user}/>}
         />
         <Route path="/login" element={<Login handleAuthEvt={handleAuthEvt} />} />
         <Route
@@ -95,7 +95,7 @@ function App(): JSX.Element {
           path="/quizzes/:id"
           element={
             <ProtectedRoute user={user}>
-              <EditQuizCard handleUpdateQuiz={handleUpdateQuiz} />
+              <EditQuizCard handleUpdateQuiz={handleUpdateQuiz} user={user} />
             </ProtectedRoute>
           }
         />
