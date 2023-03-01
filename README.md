@@ -25,7 +25,6 @@
 
 ## Ice Box 🧊
 
-* Users can access a calendar on their landing page
-* Ability to create a form for meals and recipes
-* Add drag and drop functionality
-* Add the ability to use a pomodoro timer
+* Random question selection: Allow users to select a category or difficulty level, and generate a set of random questions from that category or difficulty level.
+* Quiz timer: Add a timer to the quiz to keep track of how long it takes the user to complete the quiz.
+* Add ability to separate quizzes made for different subjects
