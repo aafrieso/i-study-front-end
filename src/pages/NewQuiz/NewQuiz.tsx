@@ -49,7 +49,7 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
   
   return (
     <main className="new">
-      <h1>Add NEW QUIZ HERE</h1>
+      <h1>Test your knowledge here!</h1>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <label htmlFor="question-input">Question:</label>
         <input
@@ -61,7 +61,7 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
           value={form.question}
           onChange={handleChange}
         />
-        <label htmlFor="option1-input">Option1:</label>
+        <label htmlFor="option1-input">Option1: </label>
         <input
           required
           type="text"
@@ -71,7 +71,7 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
           value={form.option1}
           onChange={handleChange}
         />
-        <label htmlFor="option2-input">Option2:</label>
+        <label htmlFor="option2-input">Option2: </label>
         <input
           required
           type="text"
@@ -81,7 +81,7 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
           value={form.option2}
           onChange={handleChange}
         />
-        <label htmlFor="option3-input">Option3:</label>
+        <label htmlFor="option3-input">Option3: </label>
         <input
           required
           type="text"
@@ -91,7 +91,7 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
           value={form.option3}
           onChange={handleChange}
         />
-        <label htmlFor="option4-input">Option4:</label>
+        <label htmlFor="option4-input">Option4: </label>
         <input
           required
           type="text"
@@ -101,7 +101,7 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
           value={form.option4}
           onChange={handleChange}
         />
-        <label htmlFor="answer-input">Answer:</label>
+        <label htmlFor="answer-input">Answer: </label>
         <input
           required
           type="text"
