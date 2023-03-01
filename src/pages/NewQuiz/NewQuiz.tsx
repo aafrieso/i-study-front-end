@@ -107,7 +107,7 @@ const NewQuiz = (props: NewQuizProps): JSX.Element => {
           type="text"
           name="answer"
           id="answer-input"
-          placeholder="Answer To Question Here"
+          placeholder="Answer To Question"
           value={form.answer}
           onChange={handleChange}
         />
