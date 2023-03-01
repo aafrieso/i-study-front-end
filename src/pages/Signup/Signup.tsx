@@ -26,4 +26,4 @@ const Signup = (props: SignupProps): JSX.Element => {
   )
 }
 
-export default Signup
+export default Signup;

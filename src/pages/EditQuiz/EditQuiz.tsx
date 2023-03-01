@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { QuizFormData } from '../../types/forms';
 
 interface EditQuizCardProps {
@@ -9,10 +9,8 @@ interface EditQuizCardProps {
 const EditQuizCard = ( props: EditQuizCardProps): JSX.Element => {
   const location = useLocation()
   const {quiz} = location.state
-  console.log(quiz, "message");
   
   const [form, setForm] = useState<QuizFormData>( quiz )
-  console.log(form, "newMessage");
 
   const navigate = useNavigate();
 

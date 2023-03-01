@@ -11,7 +11,7 @@ interface QuizProps {
   option4: string;
   answer: string;
   quizzes: Quiz[];
-  handleDeleteQuiz: (id: number) => void
+  handleDeleteQuiz: (id: number) => void;
 }
 
 const QuizCard = (props: QuizProps): JSX.Element => {

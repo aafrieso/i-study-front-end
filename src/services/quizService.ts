@@ -1,7 +1,5 @@
 import * as tokenService from './tokenService'
-
 const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/api/quizzes`;
-import { Quiz } from '../types/models'
 import { QuizFormData } from '../types/forms';
 
 async function index(): Promise<any> {

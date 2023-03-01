@@ -6,7 +6,7 @@ import { Quiz } from '../../types/models';
 interface NewQuizProps {
   handleAddQuiz: (QuizData: QuizData) => void;
   quizzes: Quiz[];
-  handleDeleteQuiz: (id: number) => void
+  handleDeleteQuiz: (id: number) => void;
 }
 
 interface QuizData {

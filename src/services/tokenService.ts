@@ -1,8 +1,5 @@
-// npm modules
-import jwt_decode, { JwtPayload } from 'jwt-decode'
-
-// types
-import { User } from '../types/models'
+import jwt_decode, { JwtPayload } from 'jwt-decode';
+import { User } from '../types/models';
 
 interface Payload extends JwtPayload {
   user: User

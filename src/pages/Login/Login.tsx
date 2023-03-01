@@ -1,13 +1,7 @@
-// npm modules
-import { useState } from 'react'
+import { useState } from 'react';
+import LoginForm from '../../components/LoginForm/LoginForm';
+import styles from './Login.module.css';
 
-// components
-import LoginForm from '../../components/LoginForm/LoginForm'
-
-// stylesheets
-import styles from './Login.module.css'
-
-// types
 interface LoginPageProps {
   handleAuthEvt: () => void;
 } 
@@ -26,4 +20,4 @@ const LoginPage = (props: LoginPageProps): JSX.Element => {
   )
 }
 
-export default LoginPage
+export default LoginPage;

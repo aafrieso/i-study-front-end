@@ -18,8 +18,6 @@ import * as quizService from './services/quizService';
 import { User, Quiz } from './types/models';
 import { QuizFormData } from './types/forms';
 
-import styles from './App.Module.css'
-
 function App(): JSX.Element {
   const navigate = useNavigate();
 
@@ -55,7 +53,6 @@ function App(): JSX.Element {
       await quizService.deleteQuiz(id);
       setQuizzes((prevQuizzes) => prevQuizzes.filter((quiz) => quiz.id !== id));
     } catch (error) {
-      console.log(error);
     }
   };
 
