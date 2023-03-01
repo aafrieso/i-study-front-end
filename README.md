@@ -4,7 +4,7 @@
 
 ![PlanPro Screenshot]()
 
-📌 
+📌 iStudy is designed for anyone who loves testing their knowledge in a fun and engaging way. It features the ability to make quizzes on a wide range of topics, from geography and science to pop culture and sports. iStudy allows users to tailor their quiz-taking experience to their interests and preferences.
 
 ## ➡️ [Check Out iStudy For Yourself](https://i-study.netlify.app/quizzes)
 
@@ -26,5 +26,5 @@
 ## Ice Box 🧊
 
 * Random question selection: Allow users to select a category or difficulty level, and generate a set of random questions from that category or difficulty level.
-* Quiz timer: Add a timer to the quiz to keep track of how long it takes the user to complete the quiz.
-* Add ability to separate quizzes made for different subjects
+* Quiz timer: Add a timer to the quiz to keep track of how long it takes the user to come up with the answer.
+* Add ability to separate quizzes made for different subjects.
