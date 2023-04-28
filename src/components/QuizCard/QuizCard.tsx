@@ -34,41 +34,45 @@ const QuizCard = (props: QuizProps): JSX.Element => {
     <article className={styles.container}>
       <div>
         {quizzes.map((quiz: Quiz, index: number) => (
-          <div
-            className={`${styles.card
-              } ${flippedCard === index ? styles["card-flip"] : ""}`}
-            key={quiz.id}
-            onClick={() => handleCardClick(index)}
-          >
-            <div className={styles.front}>
-              <h2>Q: {quiz.question}</h2>
-              <p>{quiz.option1}</p>
-              <p>{quiz.option2}</p>
-              <p>{quiz.option3}</p>
-              <p>{quiz.option4}</p>
-              {quiz.profileId === user?.profile.id &&
-                <button onClick={() => props.handleDeleteQuiz(quiz.id)}>
-                  Delete Quiz
-                </button>
-              }
-            </div>
-            <div className={styles.back}>
-              <h1>
-                <b>A: {quiz.answer}</b>
-              </h1>
-              {quiz.profileId === user?.profile.id &&
-                <div>
-                  <Link to={`/quizzes/${quiz.id}`} state={{ quiz }}>
-                    <button onClick={() => props}>Update Quiz</button>
-                  </Link>
+          <div key={quiz.id}>
+            {quiz.profileId === user?.profile.id &&
+              <div
+                className={`${styles.card
+                  } ${flippedCard === index ? styles["card-flip"] : ""}`}
+                key={quiz.id}
+                onClick={() => handleCardClick(index)}
+              >
+                <div className={styles.front}>
+                  <h2>Q: {quiz.question}</h2>
+                  <p>{quiz.option1}</p>
+                  <p>{quiz.option2}</p>
+                  <p>{quiz.option3}</p>
+                  <p>{quiz.option4}</p>
+                  {quiz.profileId === user?.profile.id &&
+                    <button onClick={() => props.handleDeleteQuiz(quiz.id)}>
+                      Delete Quiz
+                    </button>
+                  }
                 </div>
-              }
-            </div>
+                <div className={styles.back}>
+                  <h1>
+                    <b>A: {quiz.answer}</b>
+                  </h1>
+                  {quiz.profileId === user?.profile.id &&
+                    <div>
+                      <Link to={`/quizzes/${quiz.id}`} state={{ quiz }}>
+                        <button onClick={() => props}>Update Quiz</button>
+                      </Link>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
           </div>
         ))}
       </div>
     </article>
   );
-};
+}
 
 export default QuizCard;
